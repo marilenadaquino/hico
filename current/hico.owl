@@ -163,6 +163,34 @@ HiCO extends the PROV Ontology (http://www.w3.org/ns/prov) with terms for descri
     <owl:Class rdf:about="http://purl.org/emmedi/hico/InterpretationAct">
         <rdfs:label xml:lang="en">Interpretation Act</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/emmedi/hico/hasInterpretationCriterion"/>
+                <owl:someValuesFrom rdf:resource="http://purl.org/emmedi/hico/InterpretationCriterion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/emmedi/hico/isExtractedFrom"/>
+                <owl:someValuesFrom rdf:resource="http://purl.org/vocab/frbr/core#Expression"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://www.w3.org/TR/prov-o/#wasGeneratedBy"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="&owl;Thing"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/emmedi/hico/hasInterpretationType"/>
+                <owl:someValuesFrom rdf:resource="http://purl.org/emmedi/hico/InterpretationType"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">The hermeneutical activity performed by an agent in order to generate new information (e.g. an artwork attribution).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/emmedi/hico"/>
     </owl:Class>
@@ -185,6 +213,15 @@ HiCO extends the PROV Ontology (http://www.w3.org/ns/prov) with terms for descri
         <rdfs:label xml:lang="en">Interpretation Type</rdfs:label>
         <rdfs:comment xml:lang="en">An arbitrary definition of the interpretation act, such as artowork attribution or date attribution.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/emmedi/hico"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/vocab/frbr/core#Expression -->
+
+    <owl:Class rdf:about="http://purl.org/vocab/frbr/core#Expression">
+        <rdfs:label xml:lang="en">Expression</rdfs:label>
+        <rdfs:isDefinedBy rdf:resource="http://purl.org/vocab/frbr/core"/>
     </owl:Class>
     
 
