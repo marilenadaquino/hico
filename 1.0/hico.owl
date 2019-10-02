@@ -1,0 +1,452 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY c4o "http://purl.org/spar/c4o/" >
+    <!ENTITY terms "http://purl.org/dc/terms/" >
+    <!ENTITY hico "http://purl.org/emmedi/hico/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY swrl "http://www.w3.org/2003/11/swrl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY swrlb "http://www.w3.org/2003/11/swrlb#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://purl.org/emmedi/hico#"
+     xml:base="http://purl.org/emmedi/hico"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:c4o="http://purl.org/spar/c4o/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:hico="http://purl.org/emmedi/hico/">
+    <owl:Ontology rdf:about="http://purl.org/emmedi/hico">
+        <dc:date>16.08.2014</dc:date>
+        <owl:versionInfo>1.0</owl:versionInfo>
+        <dc:description xml:lang="en">Common approaches in describing cultural objects
+
+The usual approach in describing cultural heritage objects and their context reflects a common triple need: to adhere to interoperability standards, to exchange information among communities and then to enrich their own digital collections. But there are several limits in the practical expressivity when enriching such description.
+
+The dominant technique is currently document-centric, where a flexibility in the descriptive facets of the record, due to ad-hoc personalizations for each scholarly community (e.g. TEI community), prevents the loss of precious information; this entails to abstain from the creation of a common vocabulary, which cannot satisfy each desire of richness in content description, as the most used metadata sets (primarily, Dublin Core) have demonstrated. However, there is an interest to converge on a more data-centric approach that cannot be purely self-referential and which asks communities an effort to define a formalized, shared and exchangeable model.
+
+So, trying to answer to these questions, this model attempts to extract information as RDF statements from documents (mainly TEI documents) describing cultural objects, asking an effort in the markup phase, but preserving richness of description and reusing it in a Linked Data context.
+
+Cultural objects and Interpretation workflow
+
+In order to extract RDF statements from the content (or the &quot;full-text&quot;) of a source a middle passage, an interpretation act, is needed to create the right modelization of such complex relations; previously, the source or the object of interest should be clearly identified.
+
+Considering FRBR model for describing issues related to bibliographic references, it&apos;s clear that stating something about an object (or extract something from it) is a subjective &quot;reading&quot; of it, which involves the expression of the object (a work) and not the object (work) itself. Then, &quot;producing&quot; a subjective statement (an interpretation) means a new expression of the object of interest has been created: precisely, a new expression of a new work, which has as subject the expression (or sometimes the manifestation) of the work of interest.
+E.g. a philological interpretation of a text (an interpretation act of an expression) implies the creation of a critical edition (a new work) of the text (the expression) of the source (the work of interest).
+So, interpretations are stricly bounded to a new work, in which statements of an author (or editor) could be considered as facts: they&apos;ve been chosen by the author, and in that expression (of the new work) no other contraddictory interpretations can be stated.
+
+Obviously, an author can retract interpretations creating new expressions of his work and adding new interpretations which revise the previous.
+
+Furthermore, he can also cite other authors&apos;/editors&apos; interpretations. Issues related to versioning of an interpretative workflow and synchronous citations are resolved through CiTO, which defines a wide range of relations between citing and cited entities.(see below, Authoritative interpretations)
+
+Interpretation Acts
+
+An interpretation act is a situation in which an agent defines some useful information - about the context of an object - as rdf triples starting from the &quot;content&quot; of an object.
+
+These relations have been formalized through a set of object properties, mostly reusing terms of PROV-O ontology. An agent &quot;acts&quot; (prov:wasAssociatedWith) an interpretation extracting it from an object (hico:isExtractedFrom); precisely, using FRBR terms, an interpretation, dealing with the content of an object, is extracted from the Expression of a Work.
+
+N.B. The agent extracting an interpretation, can be the the author of the interpretation him/herself or another agent standing for him/her, who was asked to extract rdf statements from the object.
+
+Any information regarding content of an object is bounded to the intepretation act that generates it (prov:wasGeneratedBy), and not directly to the object itself. This because any information considered significant to be extracted from the content of an object requires an interpretation act to be stated: e.g. reading (and re-using information read in) a text which refers to an historical event, requires a reader who understands the author&apos;s intentions when writing assertions about that event, i.e. that interprets it.
+
+To simplify scenarios of possible contents extracted from the content of an object, HiCO imports PRO and N-ary Participation pattern as flexible models for describing: relations between people, between them and the cultural objects, between people and their actions/roles or participation in events and also towards the sources scholars use for these attributions (and towards the scholars themselves).
+
+Indeed, a particular focus here has been given to information dealing with people and events - in an event-driven approach - assuming that these relationships can cover a wide range of information about the context needed by communities to fill their objects in, and that as it is, contribute to identify clearly and unambiguously their subject of interest, i.e. the cultural object (that said, any other model dealing with information extracted from the content of an object - and considering these as entities interpreted by someone - can be used to represent a broader range of scenarios).
+
+Individuals of Interpretation Act class have been also characterized with two foundamental object properties: the hico:hasInterpretationType property and the hico:hasInterpretationCriterion property. The former states an arbitrary classification of the interpretation, which can be simply defined as philological, historical, semiotic, linguistic etc... The latter is a briefly explanation of the criterion used to state information extracted from a source, e.g. a literally transcription, an hypotesis, or the adoption of the literature about a specific argument.
+
+These informations are not required, but are meaningfull when trying to explain why an interpretation gains much authority than another one. Indeed, an interpretation act could be related to other acts through citing properties: more an act is related to other acts, probably more authority it gains in literature. Annotating these relations when describing the adopted criterion, could be a easier way to judge interpretations.
+
+Authoritative interpretations
+
+As above mentioned, interpretations can be defined with a &quot;type&quot; declaration. When seeking for historical interpretations, users expect a proof to validate assertions. Modeling these evidences could be rather arbitrary, but some issues of this problem can be formally stated: first of all, an interpretation should be supported by other similar statements from other authors&apos; interpretations - about the described facts. Furthermore, an assumption of a fact should be based on available evidences, e.g. philological interpretation acts which state where and wherefrom an historical interpretation has been deduced. These basic requirements improve trust in assertions, which earn authority. So, asking for authoritative interpretations, a network of relations can be found around them.
+
+E.g. In a document where a person has been recognised with a philological interpretation act, all assertions about that person (i.e. the instantiation of an individual of class &quot;Person&quot;) extracted from content of that document (i.e. historical interpretation acts) should be mutually related with a citing property like cito:givesBackgroundTo. So a user can retrieve entities and relations among entities, bounded through interpretations, in a particular source which attests them.
+
+
+</dc:description>
+        <terms:contributor xml:lang="en">Francesca Tomasi</terms:contributor>
+        <rdfs:comment xml:lang="en">HiCO is an OWL 2 DL ontology for describing historical context of cultural heritage objects.
+
+Cultural heritage object is a wide concept, including any sort of representation of culture heritage embodied in a tangible form - like artifacts: books, documents, works of art - and any concept, assertion, interpretation bounded to them. Furthermore, any other object stating assertions about a cultural object of interest could be considered as a cultural heritage object itself. E.g. dealing with a critical edition of a text embodied in a TEI document, we have two cultural heritage objects, the original text and the critical edition. These elements are fully described with FRBR model.
+
+Historical context involves primarily aspects explicitly described in an object of interest - like a description of an event in a document - but also recognized as implicit - like a citation of art styles in a paint - or even any information coming from other objects - like the agreement of an author with a particular artistic movement or a previous situation not mentioned in a document, maybe described somewhere else - which are all useful elements in order to clearly understand the content of the object of interest.
+
+All these sort of information are meaningfully part of the context of a cultural object and could be considered bounded to the object itself through a particular situation, i.e. an interpretation. HiCO, using referenced models like SPAR ontologies and a set of properties from PROV-O ontology, aims to describe these issues.
+</rdfs:comment>
+        <dc:title>Historical Context Ontology (HiCO)</dc:title>
+        <dc:contributor>Silvio Peroni</dc:contributor>
+        <terms:creator>Marilena Daquino</terms:creator>
+        <dc:rights>This work is distributed under a Creative Commons Attribution License (http://creativecommons.org/licenses/by/3.0/).</dc:rights>
+        <owl:imports rdf:resource="http://purl.org/spar/frbr"/>
+        <owl:imports rdf:resource="http://purl.org/spar/cito/"/>
+        <owl:imports rdf:resource="http://purl.org/spar/pro/"/>
+        <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/cp/owl/naryparticipation.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/spar/c4o/hasContent -->
+
+    <owl:AnnotationProperty rdf:about="&c4o;hasContent">
+        <rdfs:domain rdf:resource="http://purl.org/vocab/frbr/core#Expression"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/vocab/frbr/core#Expression -->
+
+    <rdfs:Datatype rdf:about="http://purl.org/vocab/frbr/core#Expression"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/emmedi/hico/hasInterpretationCriterion -->
+
+    <owl:ObjectProperty rdf:about="&hico;hasInterpretationCriterion">
+        <rdfs:label xml:lang="en">has interpretation criterion</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating an interpretation act to an individual representing a brief description of the criterion used to attest something about the content of an object. </rdfs:comment>
+        <rdfs:domain rdf:resource="&hico;InterpretationAct"/>
+        <rdfs:range rdf:resource="&hico;InterpretationCriterion"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/emmedi/hico/hasInterpretationType -->
+
+    <owl:ObjectProperty rdf:about="&hico;hasInterpretationType">
+        <rdfs:label xml:lang="en">has interpretation type</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating an interpretation act to an individual defining a broader, arbitrary, classification of the interpretation.</rdfs:comment>
+        <rdfs:domain rdf:resource="&hico;InterpretationAct"/>
+        <rdfs:range rdf:resource="&hico;InterpretationType"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/emmedi/hico/isExtractedFrom -->
+
+    <owl:ObjectProperty rdf:about="&hico;isExtractedFrom">
+        <rdfs:label xml:lang="en">is extracted from</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating interpretation acts to an expression of a work from which they&apos;ve been extracted.</rdfs:comment>
+        <rdfs:domain rdf:resource="&hico;InterpretationAct"/>
+        <rdfs:range rdf:resource="http://purl.org/vocab/frbr/core#Expression"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/ns/prov#wasInfluencedBy"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/TR/prov-o/#wasGeneratedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/TR/prov-o/#wasGeneratedBy">
+        <rdfs:label xml:lang="en">was generated by</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating an entity to an activity/situation, like an interpretation act.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasAssociatedWith -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#wasAssociatedWith">
+        <rdfs:label xml:lang="en">was associated with</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating an activity/situation, like interpretation acts, to the responsible agent.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasInfluencedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#wasInfluencedBy">
+        <rdfs:label>was influenced by</rdfs:label>
+        <rdfs:comment xml:lang="en">A broader property relating activities/situations like interpretation acts, to the endeavour from which interpretations have been extracted.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/emmedi/hico/isExtractedFrom -->
+
+    <owl:DatatypeProperty rdf:about="&hico;isExtractedFrom">
+        <rdfs:label xml:lang="en">is extracted from</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating interpretation acts to an expression of a work from which they&apos;ve been extracted.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/spar/c4o/hasContent -->
+
+    <owl:DatatypeProperty rdf:about="&c4o;hasContent">
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/emmedi/hico/InterpretationAct -->
+
+    <owl:Class rdf:about="&hico;InterpretationAct">
+        <rdfs:label xml:lang="en">Interpretation Act</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/cp/owl/situation.owl#Situation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&hico;hasInterpretationCriterion"/>
+                <owl:someValuesFrom rdf:resource="&hico;InterpretationCriterion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&hico;hasInterpretationType"/>
+                <owl:someValuesFrom rdf:resource="&hico;InterpretationType"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#wasAssociatedWith"/>
+                <owl:onClass rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+                <owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&hico;isExtractedFrom"/>
+                <owl:someValuesFrom rdf:resource="http://purl.org/vocab/frbr/core#Endeavour"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://www.w3.org/TR/prov-o/#wasGeneratedBy"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="&owl;Thing"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">An interpretation act is a situation in which an agent extracts some usefull informations from the &quot;content&quot; of an object, meaning from the expression of a work. An act is related to anything is considered significant related to the source: an event, a situation in which an agent holds a role on something, or simplier an attestation of a noun and the identification of the entitiy which has that noun. 
+</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/emmedi/hico/InterpretationCriterion -->
+
+    <owl:Class rdf:about="&hico;InterpretationCriterion">
+        <rdfs:label xml:lang="en">Interpretation Criterion</rdfs:label>
+        <rdfs:comment xml:lang="en">The criterion an agent chooses in an interpretation act, useful to explain how information have been extracted from the &quot;content&quot; of an expression. It may include statements, hypotesis, adoption of literature about the argument etc.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/emmedi/hico/InterpretationType -->
+
+    <owl:Class rdf:about="&hico;InterpretationType">
+        <rdfs:label xml:lang="en">Interpretation Type</rdfs:label>
+        <rdfs:comment xml:lang="en">A broad and arbitrary definition of an interpretative act. It may include historical (principally), philological, linguistic, paleographic, bibliographic  etc.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/vocab/frbr/core#Endeavour -->
+
+    <owl:Class rdf:about="http://purl.org/vocab/frbr/core#Endeavour"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/emmedi/hico/authoritatively-based -->
+
+    <owl:NamedIndividual rdf:about="&hico;authoritatively-based">
+        <rdf:type rdf:resource="&hico;InterpretationCriterion"/>
+        <rdfs:label xml:lang="en">authoritatively based</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/emmedi/hico/historical -->
+
+    <owl:NamedIndividual rdf:about="&hico;historical">
+        <rdf:type rdf:resource="&hico;InterpretationType"/>
+        <rdfs:label xml:lang="en">historical</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/emmedi/hico/philological -->
+
+    <owl:NamedIndividual rdf:about="&hico;philological">
+        <rdf:type rdf:resource="&hico;InterpretationType"/>
+        <rdfs:label xml:lang="en">philological</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Rules
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="urn:swrl#a">
+        <rdf:type rdf:resource="&swrl;Variable"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&swrl;Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="&swrl;AtomList"/>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="&swrl;AtomList"/>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="&swrl;AtomList"/>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="&swrl;AtomList"/>
+                                        <rdf:rest rdf:resource="&rdf;nil"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="&swrl;ClassAtom"/>
+                                                <swrl:argument1 rdf:resource="urn:swrl#a"/>
+                                                <swrl:classPredicate>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://purl.org/spar/cito/citesAsAuthority"/>
+                                                        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+                                                    </owl:Restriction>
+                                                </swrl:classPredicate>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                    </rdf:Description>
+                                </rdf:rest>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="&swrl;ClassAtom"/>
+                                        <swrl:argument1 rdf:resource="urn:swrl#a"/>
+                                        <swrl:classPredicate>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://purl.org/spar/cito/obtainsBackgroundFrom"/>
+                                                <owl:someValuesFrom rdf:resource="&hico;InterpretationAct"/>
+                                            </owl:Restriction>
+                                        </swrl:classPredicate>
+                                    </rdf:Description>
+                                </rdf:first>
+                            </rdf:Description>
+                        </rdf:rest>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="&swrl;ClassAtom"/>
+                                <swrl:argument1 rdf:resource="urn:swrl#a"/>
+                                <swrl:classPredicate>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://purl.org/spar/cito/agreesWith"/>
+                                        <owl:someValuesFrom rdf:resource="&hico;InterpretationAct"/>
+                                    </owl:Restriction>
+                                </swrl:classPredicate>
+                            </rdf:Description>
+                        </rdf:first>
+                    </rdf:Description>
+                </rdf:rest>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="&swrl;ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="&hico;InterpretationAct"/>
+                        <swrl:argument1 rdf:resource="urn:swrl#a"/>
+                    </rdf:Description>
+                </rdf:first>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="&swrl;AtomList"/>
+                <rdf:rest rdf:resource="&rdf;nil"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="&swrl;IndividualPropertyAtom"/>
+                        <swrl:argument2 rdf:resource="&hico;authoritatively-based"/>
+                        <swrl:propertyPredicate rdf:resource="&hico;hasInterpretationCriterion"/>
+                        <swrl:argument1 rdf:resource="urn:swrl#a"/>
+                    </rdf:Description>
+                </rdf:first>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
