@@ -162,6 +162,7 @@ HiCO extends the PROV Ontology (http://www.w3.org/ns/prov) with terms for descri
 
     <owl:Class rdf:about="http://purl.org/emmedi/hico/InterpretationAct">
         <rdfs:label xml:lang="en">Interpretation Act</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
         <rdfs:comment xml:lang="en">The hermeneutical activity performed by an agent in order to generate new information (e.g. an artwork attribution).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/emmedi/hico"/>
     </owl:Class>
@@ -184,6 +185,15 @@ HiCO extends the PROV Ontology (http://www.w3.org/ns/prov) with terms for descri
         <rdfs:label xml:lang="en">Interpretation Type</rdfs:label>
         <rdfs:comment xml:lang="en">An arbitrary definition of the interpretation act, such as artowork attribution or date attribution.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/emmedi/hico"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#Activity -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/prov#Activity">
+        <rdfs:label xml:lang="en">Activity</rdfs:label>
+        <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/prov"/>
     </owl:Class>
 </rdf:RDF>
 
