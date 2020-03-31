@@ -79,3 +79,7 @@ ul.toc, ol.toc {
   dt { pause-before: 20% }
   pre { speak-punctuation: code } 
 }
+
+body {
+  background-image: url(./LODELogo.png);
+}
