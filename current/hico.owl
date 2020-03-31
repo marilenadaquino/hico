@@ -1,8 +1,11 @@
-Prefix(:=<http://purl.org/emmedi/hico#>)
+Prefix(:=<http://purl.org/emmedi/hico/>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
 Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
 Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(cito:=<http://purl.org/spar/cito/>)
+Prefix(frbr:=<http://purl.org/vocab/frbr/core#>)
+Prefix(prov:=<http://www.w3.org/ns/prov#>)
 Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 
@@ -13,33 +16,35 @@ Annotation(<http://purl.org/dc/elements/1.1/contributor> "Silvio Peroni"@en)
 Annotation(<http://purl.org/dc/elements/1.1/creator> "Marilena Daquino"@en)
 Annotation(<http://purl.org/dc/elements/1.1/date> "2020-03-31"@en)
 Annotation(<http://purl.org/dc/elements/1.1/description> "The Historical Context Ontology (HiCO) is an OWL 2 DL ontology developed for representing the context of a claim. In particular, it addresses features characterising hermeneutical activities performed by scholars while generating new information (i.e. an interpretation act). It allows to represent and reason on reliability of argumentations around attributions, by evaluating features such as motivations, types of cited sources or criteria, dates, relations with other claims (e.g. agreement/disagreement). Specifically, historical context regards events and situations that are part of the life-cycle of cultural heritage objects. For instance, \"being created by somebody\", or \"being created at a certain time\", are events related to an artefact that are claimed by an agent at a certain time, motivated with usage of primary sources, and recorded in a secondary source (e.g. a cataloguing record).
-            
+
 HiCO extends the PROV Ontology (http://www.w3.org/ns/prov) with terms for describing aspects of the hermeneutical activity, and reuses existing ontologies, such as CiTO Ontology (http://purl.org/spar/cito/) for linking attributions to related sources."@en)
+Annotation(<http://purl.org/dc/elements/1.1/rights> "https://creativecommons.org/licenses/by/4.0/legalcode")
 Annotation(<http://purl.org/dc/elements/1.1/title> "The Historical Context Ontology (HiCO)"@en)
 Annotation(<http://purl.org/vocab/vann/preferredNamespacePrefix> "hico"@en)
 Annotation(<http://purl.org/vocab/vann/preferredNamespaceUri> "https://w3id.org/hico/"@en)
 Annotation(owl:versionInfo "2.0"@en)
 
-Declaration(Class(<http://purl.org/emmedi/hico/InterpretationAct>))
-Declaration(Class(<http://purl.org/emmedi/hico/InterpretationCriterion>))
-Declaration(Class(<http://purl.org/emmedi/hico/InterpretationType>))
-Declaration(Class(<http://purl.org/vocab/frbr/core#Expression>))
-Declaration(Class(<http://www.w3.org/ns/prov#Activity>))
-Declaration(ObjectProperty(<http://purl.org/emmedi/hico/hasInterpretationCriterion>))
-Declaration(ObjectProperty(<http://purl.org/emmedi/hico/hasInterpretationType>))
-Declaration(ObjectProperty(<http://purl.org/emmedi/hico/isExtractedFrom>))
-Declaration(ObjectProperty(<http://purl.org/spar/cito/agreesWith>))
-Declaration(ObjectProperty(<http://purl.org/spar/cito/cites>))
-Declaration(ObjectProperty(<http://purl.org/spar/cito/citesAsEvidence>))
-Declaration(ObjectProperty(<http://purl.org/spar/cito/disagreesWith>))
-Declaration(ObjectProperty(<http://purl.org/spar/cito/refutes>))
+Declaration(Class(:InterpretationAct))
+Declaration(Class(:InterpretationCriterion))
+Declaration(Class(:InterpretationType))
+Declaration(Class(frbr:Expression))
+Declaration(Class(prov:Activity))
+Declaration(ObjectProperty(:hasInterpretationCriterion))
+Declaration(ObjectProperty(:hasInterpretationType))
+Declaration(ObjectProperty(:isExtractedFrom))
+Declaration(ObjectProperty(cito:agreesWith))
+Declaration(ObjectProperty(cito:cites))
+Declaration(ObjectProperty(cito:citesAsEvidence))
+Declaration(ObjectProperty(cito:disagreesWith))
+Declaration(ObjectProperty(cito:refutes))
 Declaration(ObjectProperty(<http://www.w3.org/TR/prov-o/#wasGeneratedBy>))
-Declaration(ObjectProperty(<http://www.w3.org/ns/prov#wasInfluencedBy>))
-Declaration(DataProperty(<http://www.w3.org/ns/prov#startedAtTime>))
+Declaration(ObjectProperty(prov:wasInfluencedBy))
+Declaration(DataProperty(prov:startedAtTime))
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/contributor>))
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/creator>))
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/date>))
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/description>))
+Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/rights>))
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/title>))
 Declaration(AnnotationProperty(<http://purl.org/vocab/vann/preferredNamespacePrefix>))
 Declaration(AnnotationProperty(<http://purl.org/vocab/vann/preferredNamespaceUri>))
@@ -48,53 +53,53 @@ Declaration(AnnotationProperty(<http://purl.org/vocab/vann/preferredNamespaceUri
 #   Object Properties
 ############################
 
-# Object Property: <http://purl.org/emmedi/hico/hasInterpretationCriterion> (has interpretation criterion)
+# Object Property: :hasInterpretationCriterion (has interpretation criterion)
 
-AnnotationAssertion(rdfs:comment <http://purl.org/emmedi/hico/hasInterpretationCriterion> "A property relating an interpretation act to a criterion or type of source used to support the claim."@en)
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/emmedi/hico/hasInterpretationCriterion> <http://purl.org/emmedi/hico>)
-AnnotationAssertion(rdfs:label <http://purl.org/emmedi/hico/hasInterpretationCriterion> "has interpretation criterion"@en)
-ObjectPropertyDomain(<http://purl.org/emmedi/hico/hasInterpretationCriterion> <http://purl.org/emmedi/hico/InterpretationAct>)
-ObjectPropertyRange(<http://purl.org/emmedi/hico/hasInterpretationCriterion> <http://purl.org/emmedi/hico/InterpretationCriterion>)
+AnnotationAssertion(rdfs:comment :hasInterpretationCriterion "A property relating an interpretation act to a criterion or type of source used to support the claim."@en)
+AnnotationAssertion(rdfs:isDefinedBy :hasInterpretationCriterion <http://purl.org/emmedi/hico>)
+AnnotationAssertion(rdfs:label :hasInterpretationCriterion "has interpretation criterion"@en)
+ObjectPropertyDomain(:hasInterpretationCriterion :InterpretationAct)
+ObjectPropertyRange(:hasInterpretationCriterion :InterpretationCriterion)
 
-# Object Property: <http://purl.org/emmedi/hico/hasInterpretationType> (has interpretation type)
+# Object Property: :hasInterpretationType (has interpretation type)
 
-AnnotationAssertion(rdfs:comment <http://purl.org/emmedi/hico/hasInterpretationType> "A property relating an interpretation act to an individual defining an arbitrary classification of the interpretation."@en)
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/emmedi/hico/hasInterpretationType> <http://purl.org/emmedi/hico>)
-AnnotationAssertion(rdfs:label <http://purl.org/emmedi/hico/hasInterpretationType> "has interpretation type"@en)
-ObjectPropertyDomain(<http://purl.org/emmedi/hico/hasInterpretationType> <http://purl.org/emmedi/hico/InterpretationAct>)
-ObjectPropertyRange(<http://purl.org/emmedi/hico/hasInterpretationType> <http://purl.org/emmedi/hico/InterpretationType>)
+AnnotationAssertion(rdfs:comment :hasInterpretationType "A property relating an interpretation act to an individual defining an arbitrary classification of the interpretation."@en)
+AnnotationAssertion(rdfs:isDefinedBy :hasInterpretationType <http://purl.org/emmedi/hico>)
+AnnotationAssertion(rdfs:label :hasInterpretationType "has interpretation type"@en)
+ObjectPropertyDomain(:hasInterpretationType :InterpretationAct)
+ObjectPropertyRange(:hasInterpretationType :InterpretationType)
 
-# Object Property: <http://purl.org/emmedi/hico/isExtractedFrom> (is extracted from)
+# Object Property: :isExtractedFrom (is extracted from)
 
-AnnotationAssertion(rdfs:comment <http://purl.org/emmedi/hico/isExtractedFrom> "A property relating an interpretation act to the source where from the claim has been extracted."@en)
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/emmedi/hico/isExtractedFrom> <http://purl.org/emmedi/hico>)
-AnnotationAssertion(rdfs:label <http://purl.org/emmedi/hico/isExtractedFrom> "is extracted from"@en)
-SubObjectPropertyOf(<http://purl.org/emmedi/hico/isExtractedFrom> <http://www.w3.org/ns/prov#wasInfluencedBy>)
-ObjectPropertyDomain(<http://purl.org/emmedi/hico/isExtractedFrom> <http://purl.org/emmedi/hico/InterpretationAct>)
+AnnotationAssertion(rdfs:comment :isExtractedFrom "A property relating an interpretation act to the source where from the claim has been extracted."@en)
+AnnotationAssertion(rdfs:isDefinedBy :isExtractedFrom <http://purl.org/emmedi/hico>)
+AnnotationAssertion(rdfs:label :isExtractedFrom "is extracted from"@en)
+SubObjectPropertyOf(:isExtractedFrom prov:wasInfluencedBy)
+ObjectPropertyDomain(:isExtractedFrom :InterpretationAct)
 
-# Object Property: <http://purl.org/spar/cito/agreesWith> (agrees with)
+# Object Property: cito:agreesWith (agrees with)
 
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/spar/cito/agreesWith> <http://purl.org/spar/cito>)
-AnnotationAssertion(rdfs:label <http://purl.org/spar/cito/agreesWith> "agrees with"@en)
-SubObjectPropertyOf(<http://purl.org/spar/cito/agreesWith> <http://purl.org/spar/cito/cites>)
+AnnotationAssertion(rdfs:isDefinedBy cito:agreesWith <http://purl.org/spar/cito>)
+AnnotationAssertion(rdfs:label cito:agreesWith "agrees with"@en)
+SubObjectPropertyOf(cito:agreesWith cito:cites)
 
-# Object Property: <http://purl.org/spar/cito/citesAsEvidence> (cites as evidence)
+# Object Property: cito:citesAsEvidence (cites as evidence)
 
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/spar/cito/citesAsEvidence> <http://purl.org/spar/cito>)
-AnnotationAssertion(rdfs:label <http://purl.org/spar/cito/citesAsEvidence> "cites as evidence"@en)
-SubObjectPropertyOf(<http://purl.org/spar/cito/citesAsEvidence> <http://purl.org/spar/cito/cites>)
+AnnotationAssertion(rdfs:isDefinedBy cito:citesAsEvidence <http://purl.org/spar/cito>)
+AnnotationAssertion(rdfs:label cito:citesAsEvidence "cites as evidence"@en)
+SubObjectPropertyOf(cito:citesAsEvidence cito:cites)
 
-# Object Property: <http://purl.org/spar/cito/disagreesWith> (disagrees with)
+# Object Property: cito:disagreesWith (disagrees with)
 
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/spar/cito/disagreesWith> <http://purl.org/spar/cito>)
-AnnotationAssertion(rdfs:label <http://purl.org/spar/cito/disagreesWith> "disagrees with"@en)
-SubObjectPropertyOf(<http://purl.org/spar/cito/disagreesWith> <http://purl.org/spar/cito/cites>)
+AnnotationAssertion(rdfs:isDefinedBy cito:disagreesWith <http://purl.org/spar/cito>)
+AnnotationAssertion(rdfs:label cito:disagreesWith "disagrees with"@en)
+SubObjectPropertyOf(cito:disagreesWith cito:cites)
 
-# Object Property: <http://purl.org/spar/cito/refutes> (refutes)
+# Object Property: cito:refutes (refutes)
 
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/spar/cito/refutes> <http://purl.org/spar/cito>)
-AnnotationAssertion(rdfs:label <http://purl.org/spar/cito/refutes> "refutes"@en)
-SubObjectPropertyOf(<http://purl.org/spar/cito/refutes> <http://purl.org/spar/cito/cites>)
+AnnotationAssertion(rdfs:isDefinedBy cito:refutes <http://purl.org/spar/cito>)
+AnnotationAssertion(rdfs:label cito:refutes "refutes"@en)
+SubObjectPropertyOf(cito:refutes cito:cites)
 
 # Object Property: <http://www.w3.org/TR/prov-o/#wasGeneratedBy> (was generated by)
 
@@ -102,22 +107,22 @@ AnnotationAssertion(rdfs:comment <http://www.w3.org/TR/prov-o/#wasGeneratedBy> "
 AnnotationAssertion(rdfs:isDefinedBy <http://www.w3.org/TR/prov-o/#wasGeneratedBy> <http://www.w3.org/ns/prov>)
 AnnotationAssertion(rdfs:label <http://www.w3.org/TR/prov-o/#wasGeneratedBy> "was generated by"@en)
 
-# Object Property: <http://www.w3.org/ns/prov#wasInfluencedBy> (was influenced by)
+# Object Property: prov:wasInfluencedBy (was influenced by)
 
-AnnotationAssertion(rdfs:isDefinedBy <http://www.w3.org/ns/prov#wasInfluencedBy> <http://www.w3.org/ns/prov>)
-AnnotationAssertion(rdfs:label <http://www.w3.org/ns/prov#wasInfluencedBy> "was influenced by"@en)
+AnnotationAssertion(rdfs:isDefinedBy prov:wasInfluencedBy <http://www.w3.org/ns/prov>)
+AnnotationAssertion(rdfs:label prov:wasInfluencedBy "was influenced by"@en)
 
 
 ############################
 #   Data Properties
 ############################
 
-# Data Property: <http://www.w3.org/ns/prov#startedAtTime> (started at time)
+# Data Property: prov:startedAtTime (started at time)
 
-AnnotationAssertion(rdfs:comment <http://www.w3.org/ns/prov#startedAtTime> "A property relating an interpretation act to the time that triggered the activity."@en)
-AnnotationAssertion(rdfs:isDefinedBy <http://www.w3.org/ns/prov#startedAtTime> <http://www.w3.org/ns/prov>)
-AnnotationAssertion(rdfs:label <http://www.w3.org/ns/prov#startedAtTime> "started at time"@en)
-DataPropertyRange(<http://www.w3.org/ns/prov#startedAtTime> xsd:dateTime)
+AnnotationAssertion(rdfs:comment prov:startedAtTime "A property relating an interpretation act to the time that triggered the activity."@en)
+AnnotationAssertion(rdfs:isDefinedBy prov:startedAtTime <http://www.w3.org/ns/prov>)
+AnnotationAssertion(rdfs:label prov:startedAtTime "started at time"@en)
+DataPropertyRange(prov:startedAtTime xsd:dateTime)
 
 
 
@@ -125,38 +130,38 @@ DataPropertyRange(<http://www.w3.org/ns/prov#startedAtTime> xsd:dateTime)
 #   Classes
 ############################
 
-# Class: <http://purl.org/emmedi/hico/InterpretationAct> (Interpretation Act)
+# Class: :InterpretationAct (Interpretation Act)
 
-AnnotationAssertion(rdfs:comment <http://purl.org/emmedi/hico/InterpretationAct> "The hermeneutical activity performed by an agent in order to generate new information (e.g. an artwork attribution)."@en)
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/emmedi/hico/InterpretationAct> <http://purl.org/emmedi/hico>)
-AnnotationAssertion(rdfs:label <http://purl.org/emmedi/hico/InterpretationAct> "Interpretation Act"@en)
-SubClassOf(<http://purl.org/emmedi/hico/InterpretationAct> <http://www.w3.org/ns/prov#Activity>)
-SubClassOf(<http://purl.org/emmedi/hico/InterpretationAct> ObjectSomeValuesFrom(<http://purl.org/emmedi/hico/hasInterpretationCriterion> <http://purl.org/emmedi/hico/InterpretationCriterion>))
-SubClassOf(<http://purl.org/emmedi/hico/InterpretationAct> ObjectSomeValuesFrom(<http://purl.org/emmedi/hico/hasInterpretationType> <http://purl.org/emmedi/hico/InterpretationType>))
-SubClassOf(<http://purl.org/emmedi/hico/InterpretationAct> ObjectSomeValuesFrom(<http://purl.org/emmedi/hico/isExtractedFrom> <http://purl.org/vocab/frbr/core#Expression>))
-SubClassOf(<http://purl.org/emmedi/hico/InterpretationAct> ObjectSomeValuesFrom(ObjectInverseOf(<http://www.w3.org/TR/prov-o/#wasGeneratedBy>) owl:Thing))
+AnnotationAssertion(rdfs:comment :InterpretationAct "The hermeneutical activity performed by an agent in order to generate new information (e.g. an artwork attribution)."@en)
+AnnotationAssertion(rdfs:isDefinedBy :InterpretationAct <http://purl.org/emmedi/hico>)
+AnnotationAssertion(rdfs:label :InterpretationAct "Interpretation Act"@en)
+SubClassOf(:InterpretationAct prov:Activity)
+SubClassOf(:InterpretationAct ObjectSomeValuesFrom(:hasInterpretationCriterion :InterpretationCriterion))
+SubClassOf(:InterpretationAct ObjectSomeValuesFrom(:hasInterpretationType :InterpretationType))
+SubClassOf(:InterpretationAct ObjectSomeValuesFrom(:isExtractedFrom frbr:Expression))
+SubClassOf(:InterpretationAct ObjectSomeValuesFrom(ObjectInverseOf(<http://www.w3.org/TR/prov-o/#wasGeneratedBy>) owl:Thing))
 
-# Class: <http://purl.org/emmedi/hico/InterpretationCriterion> (Interpretation Criterion)
+# Class: :InterpretationCriterion (Interpretation Criterion)
 
-AnnotationAssertion(rdfs:comment <http://purl.org/emmedi/hico/InterpretationCriterion> "The criterion or type of source used by an agent to support an interpretation act, such as bibliography, verbal communication, etc. "@en)
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/emmedi/hico/InterpretationCriterion> <http://purl.org/emmedi/hico>)
-AnnotationAssertion(rdfs:label <http://purl.org/emmedi/hico/InterpretationCriterion> "Interpretation Criterion"@en)
+AnnotationAssertion(rdfs:comment :InterpretationCriterion "The criterion or type of source used by an agent to support an interpretation act, such as bibliography, verbal communication, etc. "@en)
+AnnotationAssertion(rdfs:isDefinedBy :InterpretationCriterion <http://purl.org/emmedi/hico>)
+AnnotationAssertion(rdfs:label :InterpretationCriterion "Interpretation Criterion"@en)
 
-# Class: <http://purl.org/emmedi/hico/InterpretationType> (Interpretation Type)
+# Class: :InterpretationType (Interpretation Type)
 
-AnnotationAssertion(rdfs:comment <http://purl.org/emmedi/hico/InterpretationType> "An arbitrary definition of the interpretation act, such as artowork attribution or date attribution."@en)
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/emmedi/hico/InterpretationType> <http://purl.org/emmedi/hico>)
-AnnotationAssertion(rdfs:label <http://purl.org/emmedi/hico/InterpretationType> "Interpretation Type"@en)
+AnnotationAssertion(rdfs:comment :InterpretationType "An arbitrary definition of the interpretation act, such as artowork attribution or date attribution."@en)
+AnnotationAssertion(rdfs:isDefinedBy :InterpretationType <http://purl.org/emmedi/hico>)
+AnnotationAssertion(rdfs:label :InterpretationType "Interpretation Type"@en)
 
-# Class: <http://purl.org/vocab/frbr/core#Expression> (Expression)
+# Class: frbr:Expression (Expression)
 
-AnnotationAssertion(rdfs:isDefinedBy <http://purl.org/vocab/frbr/core#Expression> <http://purl.org/vocab/frbr/core>)
-AnnotationAssertion(rdfs:label <http://purl.org/vocab/frbr/core#Expression> "Expression"@en)
+AnnotationAssertion(rdfs:isDefinedBy frbr:Expression <http://purl.org/vocab/frbr/core>)
+AnnotationAssertion(rdfs:label frbr:Expression "Expression"@en)
 
-# Class: <http://www.w3.org/ns/prov#Activity> (Activity)
+# Class: prov:Activity (Activity)
 
-AnnotationAssertion(rdfs:isDefinedBy <http://www.w3.org/ns/prov#Activity> <http://www.w3.org/ns/prov>)
-AnnotationAssertion(rdfs:label <http://www.w3.org/ns/prov#Activity> "Activity"@en)
+AnnotationAssertion(rdfs:isDefinedBy prov:Activity <http://www.w3.org/ns/prov>)
+AnnotationAssertion(rdfs:label prov:Activity "Activity"@en)
 
 
 )
